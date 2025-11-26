@@ -1,4 +1,3 @@
-import java.util.Random;
 
 public class Wordle {
 
@@ -56,6 +55,25 @@ public class Wordle {
                 }
             }
         }
+
+        /* 
+        // Covers the cases where the word guessed has a char more times than the secret word
+        String charsChecked = "";
+        for (int i = 0; i < secret.length(); i++) {
+            char c = guess.charAt(i);
+            if (countChar(charsChecked, c) > 0) {   continue;   }
+            // If the word has the char less times than the guess
+            if (countChar(secret, c) < countChar(guess, c)) {
+                int amountToRemove = countChar(guess, c) - countChar(secret, c);
+                for (int j = resultRow.length - 1; j >= 0 && amountToRemove > 0; j--) {
+                    if (guess.charAt(j) == c && resultRow[j] == 'Y') {
+                        resultRow[j] = '_';
+                        amountToRemove--;
+                    }
+                }
+                charsChecked += c;
+            }
+        } */
     }
 
     // Store guess string (chars) into the given row of guesses 2D array.
@@ -135,7 +153,10 @@ public class Wordle {
                 }
             }
 
+            // Stores the inputed guess
             storeGuess(guess, guesses, attempt);
+            
+            // Computes the results of the current guess and stores them in the results array (in the set row)
             computeFeedback(secret, guess, results[attempt]);
 
             // Print board
